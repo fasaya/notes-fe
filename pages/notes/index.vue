@@ -2,10 +2,9 @@
 	<div>
 		<div class="container mx-auto">
 			<div class="grid grid-cols-2">
-				<div>01</div>
-				<!-- ... -->
-				<div>09</div>
-				<!-- ... -->
+				<div>card 1</div>
+				<div>card 2</div>
+				<div>card 3</div>
 			</div>
 		</div>
 	</div>
