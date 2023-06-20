@@ -13,7 +13,7 @@ module.exports = {
 			colors: {
 				"main-yellow": "#fdbe00",
 				"light-stone": "#f7f7f7",
-				"medium-stone": "#ededed",
+				"medium-stone": "#c4c4c4",
 				stone: "#555555",
 			},
 		},

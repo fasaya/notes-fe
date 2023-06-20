@@ -26,7 +26,7 @@
 				<div
 					class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-end"
 				>
-					<input type="text" placeholder="Search" name="" id="" class="px-3 py-2 flex items-center text-xs uppercase leading-snug text-medium-stone opacity-75 hover:opacity-100 rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full">
+					<input type="text" placeholder="Search" name="" id="" class="px-3 py-2 flex items-center text-xs uppercase leading-snug text-stone opacity-75 hover:opacity-100 rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full">
 				</div>
 				<!-- <div
 					v-bind:class="{ hidden: !showMenu, flex: showMenu }"
@@ -67,7 +67,7 @@
 </template>
 
 <style scoped>
-#main1 {
+html {
 	height: 100vh;
 }
 </style>

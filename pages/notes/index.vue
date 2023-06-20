@@ -1,17 +1,22 @@
+<script setup>
+import Card from '@/components/notes/Card.vue'
+
+definePageMeta({
+	path: '/'
+});
+</script>
+
 <template>
 	<div>
 		<div class="container mx-auto">
-			<div class="grid grid-cols-2">
-				<div>card 1</div>
-				<div>card 2</div>
-				<div>card 3</div>
+			<div class="grid lg:grid-cols-2 gap-4">
+				<Card data=""/>
+				<Card/>
+				<Card/>
+				<Card/>
+				<Card/>
+				<Card/>
 			</div>
 		</div>
 	</div>
 </template>
-
-<script setup>
-definePageMeta({
-	path: '/'
-})
-</script>
