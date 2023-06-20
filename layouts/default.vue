@@ -1,7 +1,7 @@
 <template>
 	<div id="main1" class="bg-light-stone">
 		<nav
-			class="relative flex flex-wrap items-center justify-between px-3 py-3 bg-light-stone mb-3"
+			class="relative flex flex-wrap items-center justify-between px-3 py-5 bg-light-stone"
 		>
 			<div
 				class="container px-4 mx-auto flex flex-wrap items-center justify-between"
