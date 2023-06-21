@@ -1,5 +1,5 @@
 <template>
-	<div id="main1" class="bg-light-stone">
+	<div class="bg-light-stone pb-5">
 		<nav
 			class="relative flex flex-wrap items-center justify-between px-3 py-5 bg-light-stone"
 		>
@@ -67,7 +67,7 @@
 </template>
 
 <style scoped>
-html {
+html, body {
 	height: 100vh;
 }
 </style>
