@@ -1,13 +1,13 @@
 <template>
 	<teleport to="body">
 		<div>
-			<button
+			<!-- <button
 				class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 				type="button"
 				v-on:click="toggleModal()"
 			>
 				Open regular modal
-			</button>
+			</button> -->
 			<div
 				v-if="showModal"
 				class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
@@ -21,10 +21,12 @@
 						<div
 							class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
 						>
-							<h3 class="text-3xl font-semibold">Modal Title</h3>
+							<h3 class="text-3xl font-semibold">
+                                Note
+                            </h3>
 							<button
 								class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-								v-on:click="toggleModal()"
+								v-on:click="closeModal"
 							>
 								<span
 									class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
@@ -35,17 +37,7 @@
 						</div>
 						<!--body-->
 						<div class="relative p-6 flex-auto">
-							<p
-								class="my-4 text-slate-500 text-lg leading-relaxed"
-							>
-								I always felt like I could do anything. That’s
-								the main thing people are controlled by!
-								Thoughts- their perception of themselves!
-								They're slowed down by their perception of
-								themselves. If you're taught you can’t do
-								anything, you won’t do anything. I was taught I
-								could do everything.
-							</p>
+							<slot />
 						</div>
 						<!--footer-->
 						<div
@@ -54,7 +46,7 @@
 							<button
 								class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 								type="button"
-								v-on:click="toggleModal()"
+								v-on:click="closeModal"
 							>
 								Close
 							</button>
@@ -78,22 +70,47 @@
 </template>
 
 <script>
-// const props = defineProps(["data"]);
+import { ref, watch } from "vue";
+
+const props = {
+	show: {
+		type: Boolean,
+		default: false,
+	},
+};
 
 export default {
 	name: "notes-form-modal",
 	data() {
-		// console.log("isModalShow", this.isModalShow);
 		return {
 			data: {},
-			showModal: false,
 		};
 	},
-	props: ["data", "isModalShow"],
-	methods: {
-		toggleModal: function () {
-			this.showModal = !this.showModal;
-		},
+	props,
+	// methods: {
+	// 	toggleModal: function () {
+	// 		this.showModal = !this.showModal;
+	// 	},
+	// },
+	setup(props) {
+		const showModal = ref(false);
+
+		function closeModal() {
+			showModal.value = false;
+		}
+
+		watch(
+			() => props.show,
+			(show) => {
+				showModal.value = show;
+				console.log("show", show);
+			}
+		);
+
+		return {
+			showModal,
+			closeModal,
+		};
 	},
 };
 </script>

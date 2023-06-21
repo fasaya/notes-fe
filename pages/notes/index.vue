@@ -1,4 +1,6 @@
 <script>
+import { ref } from "vue";
+
 import Card from "@/components/notes/Card.vue";
 import FormModal from "@/components/notes/FormModal.vue";
 
@@ -38,6 +40,12 @@ export default {
 				});
 		},
 	},
+	setup() {
+		const showModal = ref(false);
+		return {
+			showModal,
+		};
+	},
 };
 
 definePageMeta({
@@ -64,11 +72,23 @@ definePageMeta({
 				<!-- {{ isLoading ? "Loading..." : "" }} -->
 
 				<div v-for="e of data" :key="e" :to="'/note/' + e.uuid">
-					<Card :data="e" />
+					<Card :data="e" @click="showModal = !showModal" />
 				</div>
 			</div>
 
 			<p>{{ links.next }}</p>
 		</div>
 	</div>
+
+	<FormModal :show="showModal">
+		<form>
+			<div class="mb-3 pt-0">
+				<input
+					type="text"
+					placeholder="Placeholder"
+					class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+				/>
+			</div>
+		</form>
+	</FormModal>
 </template>

@@ -21,9 +21,6 @@
 				</div>
 				<p class="text-gray-500 text-base">
                     {{ data.title }}
-					<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Voluptatibus quia, nulla! Maiores et perferendis eaque,
-					exercitationem praesentium nihil. -->
 				</p>
 			</div>
 			<div class="flex items-center">
