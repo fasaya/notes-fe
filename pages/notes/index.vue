@@ -1,9 +1,10 @@
 <script>
 import Card from "@/components/notes/Card.vue";
+import FormModal from "@/components/notes/FormModal.vue";
 
 export default {
 	name: "notes",
-	components: { Card },
+	components: { Card, FormModal },
 	data() {
 		return {
 			isLoading: true,
@@ -15,22 +16,27 @@ export default {
 		const config = useRuntimeConfig();
 		let url = config.public.apiUrl + "api/v1/note";
 
-		console.log("url", url);
+		// console.log("url", url);
 
-		await fetch(url)
-			.then((response) => response.json())
-			.then(async (data) => {
-				console.log(data);
-				if (data.data) {
-					this.data = data.data;
-					this.links = data.links;
-				}
-				this.isLoading = false;
-			})
-			.catch((err) => {
-				console.log(err);
-				this.isLoading = false;
-			});
+		this.getNotes(url);
+	},
+	methods: {
+		getNotes: async function (url) {
+			await fetch(url)
+				.then((response) => response.json())
+				.then(async (data) => {
+					// console.log(data);
+					if (data.data) {
+						this.data = data.data;
+						this.links = data.links;
+					}
+					this.isLoading = false;
+				})
+				.catch((err) => {
+					console.log(err);
+					this.isLoading = false;
+				});
+		},
 	},
 };
 
@@ -42,7 +48,6 @@ definePageMeta({
 <template>
 	<div class="flex justify-center">
 		<div class="container mx-2">
-			
 			<div>
 				<div
 					class="relative flex w-full flex-wrap items-stretch mb-3 lg:w-2/3 mx-auto px-2 pt-3 lg:pt-1"
@@ -62,6 +67,8 @@ definePageMeta({
 					<Card :data="e" />
 				</div>
 			</div>
+
+			<p>{{ links.next }}</p>
 		</div>
 	</div>
 </template>

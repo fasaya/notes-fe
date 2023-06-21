@@ -52,5 +52,5 @@
 
 <script setup>
 const props = defineProps(["data"]);
-console.log('props', props.data);
+// console.log('props', props.data);
 </script>
