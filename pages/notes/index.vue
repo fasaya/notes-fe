@@ -11,6 +11,7 @@ export default {
 		return {
 			isLoading: true,
 			data: {},
+			dataSelected: ref({}),
 			links: {},
 		};
 	},
@@ -38,6 +39,14 @@ export default {
 					console.log(err);
 					this.isLoading = false;
 				});
+		},
+		onCloseModal(value) {
+			this.showModal = value;
+			this.setSelectedData({});
+		},
+		setSelectedData(value) {
+			this.dataSelected = value;
+			console.log("setSelectedData", this.dataSelected);
 		},
 	},
 	setup() {
@@ -72,7 +81,13 @@ definePageMeta({
 				<!-- {{ isLoading ? "Loading..." : "" }} -->
 
 				<div v-for="e of data" :key="e" :to="'/note/' + e.uuid">
-					<Card :data="e" @click="showModal = !showModal" />
+					<Card
+						:data="e"
+						@click="
+							showModal = !showModal;
+							setSelectedData(e);
+						"
+					/>
 				</div>
 			</div>
 
@@ -80,14 +95,25 @@ definePageMeta({
 		</div>
 	</div>
 
-	<FormModal :show="showModal">
+	<FormModal :show="showModal" @closed="onCloseModal">
 		<form>
-			<div class="mb-3 pt-0">
+			<div class="mb-3">
 				<input
+					id="title"
 					type="text"
-					placeholder="Placeholder"
+					placeholder="Title"
+					:value="dataSelected.title"
 					class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
 				/>
+			</div>
+			<div class="mb-3">
+				<textarea
+					id="body"
+					row="3"
+					placeholder="Description"
+					:value="dataSelected.body"
+					class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+				></textarea>
 			</div>
 		</form>
 	</FormModal>

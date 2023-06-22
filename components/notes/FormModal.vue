@@ -12,7 +12,7 @@
 				v-if="showModal"
 				class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
 			>
-				<div class="relative w-auto my-6 mx-auto max-w-3xl">
+				<div class="relative lg:w-2/3 w-5/6 my-6 mx-auto max-w-3xl">
 					<!--content-->
 					<div
 						class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
@@ -40,7 +40,7 @@
 							<slot />
 						</div>
 						<!--footer-->
-						<div
+						<!-- <div
 							class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
 						>
 							<button
@@ -57,7 +57,7 @@
 							>
 								Save Changes
 							</button>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -87,29 +87,27 @@ export default {
 		};
 	},
 	props,
-	// methods: {
-	// 	toggleModal: function () {
-	// 		this.showModal = !this.showModal;
-	// 	},
-	// },
+	methods: {
+		toggleModal: function () {
+			this.showModal = !this.showModal;
+		},
+        closeModal: function() {
+            this.$emit('closed', false)
+			this.showModal = false;
+		}
+	},
 	setup(props) {
 		const showModal = ref(false);
-
-		function closeModal() {
-			showModal.value = false;
-		}
 
 		watch(
 			() => props.show,
 			(show) => {
 				showModal.value = show;
-				console.log("show", show);
 			}
 		);
 
 		return {
 			showModal,
-			closeModal,
 		};
 	},
 };

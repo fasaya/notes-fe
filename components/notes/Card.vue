@@ -1,9 +1,9 @@
 <template>
-	<div class="w-full max-w-full min-w-full">
+	<div class="w-full max-w-full min-w-full cursor-pointer">
 		<div
-			class="bg-white rounded-md p-4 m-2 flex flex-col justify-between leading-normal shadow-md"
+			class="bg-white rounded-md p-4 m-2 flex flex-col justify-between leading-normal shadow-md min-h-full"
 		>
-			<div class="mb-8">
+			<div class="mb-2" v-if="data.body || data.title">
 				<!-- <p class="text-sm text-gray-600 flex items-center">
 					<svg
 						class="fill-current text-gray-500 w-3 h-3 mr-2"
@@ -16,17 +16,20 @@
 					</svg>
 					Members only
 				</p> -->
-				<div class="text-stone font-bold text-xl mb-2">
+				<div
+					class="text-stone font-bold text-xl mb-2"
+					v-if="data.title"
+				>
 					{{ data.title }}
 				</div>
-				<p class="text-gray-500 text-base">
-                    {{ data.title }}
+				<p id="note-form-body" class="text-gray-500 text-base" v-if="data.body">
+					{{ truncate(data.body, 150) }}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<div class="text-sm">
+				<div class="text-xs">
 					<!-- <p class="text-gray-900 leading-none">Jonathan Reinink</p> -->
-					<p class="text-gray-600">Aug 18</p>
+					<p class="text-gray-600">{{ data.created_at }}</p>
 				</div>
 			</div>
 			<!-- <div class="pt-4 pb-2">
@@ -50,4 +53,15 @@
 <script setup>
 const props = defineProps(["data"]);
 // console.log('props', props.data);
+function truncate(str, n){
+  return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+};
 </script>
+
+<style>
+#note-form-body {
+	/* white-space: wrap; */
+    overflow: hidden;
+	text-overflow: ellipsis
+}
+</style>
