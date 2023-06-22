@@ -25,11 +25,11 @@
                                 Note
                             </h3>
 							<button
-								class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+								class="p-1 ml-auto bg-transparent border-0 text-black opacity-70 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
 								v-on:click="closeModal"
 							>
 								<span
-									class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+									class="bg-transparent text-black opacity-70 h-6 w-6 text-2xl block outline-none focus:outline-none"
 								>
 									×
 								</span>

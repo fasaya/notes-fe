@@ -25,6 +25,10 @@ export default {
 	},
 	methods: {
 		getNotes: async function (url = null) {
+			this.isLoading = false;
+			this.data = {};
+			this.links = {};
+
 			if (!url) {
 				const config = useRuntimeConfig();
 				url = config.public.apiUrl + "api/v1/note";
@@ -132,6 +136,7 @@ definePageMeta({
 							showModal = !showModal;
 							setSelectedData({});
 						"
+						readonly
 					/>
 				</div>
 			</div>
@@ -187,7 +192,7 @@ definePageMeta({
 			<div class="mb-3">
 				<textarea
 					ref="body"
-					row="3"
+					row="10"
 					placeholder="Description"
 					:value="dataSelected.body"
 					class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
