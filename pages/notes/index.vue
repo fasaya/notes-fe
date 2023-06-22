@@ -4,6 +4,7 @@ import axios from "axios";
 
 import Card from "@/components/notes/Card.vue";
 import FormModal from "@/components/notes/FormModal.vue";
+// import Pagination from "@/components/notes/Pagination.vue";
 
 export default {
 	name: "notes",
@@ -32,10 +33,10 @@ export default {
 			await fetch(url)
 				.then((response) => response.json())
 				.then(async (data) => {
-					// console.log(data);
+					// console.log(data.meta.links);
 					if (data.data) {
 						this.data = data.data;
-						this.links = data.links;
+						this.links = data.meta.links;
 					}
 					this.isLoading = false;
 				})
@@ -50,7 +51,7 @@ export default {
 		},
 		setSelectedData(value) {
 			this.dataSelected = value;
-			console.log("setSelectedData", this.dataSelected);
+			// console.log("setSelectedData", this.dataSelected);
 		},
 		submitForm() {
 			const config = useRuntimeConfig();
@@ -68,14 +69,14 @@ export default {
 				title: this.$refs.title.value,
 				body: this.$refs.body.value,
 			};
-			console.log("formData", formData);
+			// console.log("formData", formData);
 
 			if (this.dataSelected.uuid) {
 				axios
 					.put(url, formData)
 					.then((res) => {
 						this.onCloseModal(false);
-						console.log("res", res.data);
+						// console.log("res", res.data);
 						this.getNotes();
 					})
 					.catch((err) => {
@@ -89,7 +90,7 @@ export default {
 					.post(url, formData)
 					.then((res) => {
 						this.onCloseModal(false);
-						console.log("res", res.data);
+						// console.log("res", res.data);
 						this.getNotes();
 					})
 					.catch((err) => {
@@ -149,7 +150,26 @@ definePageMeta({
 				</div>
 			</div>
 
-			<p>{{ links.next }}</p>
+			<!-- Pagination: start  -->
+			<div class="py-2">
+				<nav class="block">
+					<ul class="flex pl-0 rounded list-none flex-wrap">
+						<div v-for="e of links" :key="e">
+							<li v-if="e.url">
+								<a
+									class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-neutral-500 cursor-pointer"
+									:class="`${e.active ? 'text-white bg-neutral-500' : 'bg-white text-neutral-500'}`"
+									@click="this.getNotes(e.url)"
+								>
+									<span v-html="e.label"></span>
+								</a>
+							</li>
+						</div>
+					</ul>
+				</nav>
+			</div>
+			<!-- Pagination: end  -->
+
 		</div>
 	</div>
 
